@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
-                    <a href="<?= base_url('auth/registration'); ?>" class="btn btn-primary btn-sm">
+                    <a href="<?= base_url('auth/add'); ?>" class="btn btn-primary btn-sm">
                         <i class="fa fa-plus"></i> Tambah User
                     </a>
                 </div>

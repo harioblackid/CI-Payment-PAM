@@ -25,7 +25,22 @@ class Auth extends CI_Controller
             $this->load->view('templates/auth_footer');
         } else {
             // validasinya success
-            $this->_login();
+            $this->_login();    
+        }
+    }
+
+    public function add()
+    {
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Add User';
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar');
+            $this->load->view('templates/topbar');
+            $this->load->view('auth/add');
+            $this->load->view('templates/footer');
+        } else {
+            // validasinya success
+            $this->_adduser();
         }
     }
 
@@ -64,6 +79,30 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
+
+    private function _adduser()
+    {
+        $email = $this->input->post('email', true);
+        $data = [
+            'name' => htmlspecialchars($this->input->post('name', true)),
+            'email' => htmlspecialchars($email),
+            'image' => '16363.png',
+            'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'is_active' => 1,
+            'date_created' => time()
+        ];
+
+        // siapkan token
+        // $token = base64_encode(random_bytes(32));
+        // $user_token = [
+        //     'email' => $email,
+        //     'token' => $token,
+        //     'date_created' => time()
+        // ];
+
+        $this->db->insert('user', $data);
+    }
     
     public function registration()
     {
@@ -80,32 +119,12 @@ class Auth extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'User Registration';
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('auth/add', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('templates/auth_header', $data);
+            $this->load->view('auth/registration', $data);
+            $this->load->view('templates/auth_header', $data);
         } else {
-            $email = $this->input->post('email', true);
-            $data = [
-                'name' => htmlspecialchars($this->input->post('name', true)),
-                'email' => htmlspecialchars($email),
-                'image' => '16363.png',
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role_id' => 2,
-                'is_active' => 1,
-                'date_created' => time()
-            ];
-
-            // siapkan token
-            // $token = base64_encode(random_bytes(32));
-            // $user_token = [
-            //     'email' => $email,
-            //     'token' => $token,
-            //     'date_created' => time()
-            // ];
-
-            $this->db->insert('user', $data);
+            
+            $this->_adduser();
             // $this->db->insert('user_token', $user_token);
 
             //$this->_sendEmail($token, 'verify');

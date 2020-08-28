@@ -29,8 +29,23 @@
                         <th scope="row"><?= $i; ?></th>
                         <td><?= $m['menu']; ?></td>
                         <td>
-                            <a href="" class="badge badge-success">edit</a>
-                            <a href="" class="badge badge-danger">delete</a>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bars fa-sm fa-fw text-blue-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Option :</div>
+                                    <button data-key="<?=encode($m['id']); ?>" data-url="<?=base_url('menu/deletemenu'); ?>" class="dropdown-item show-confirm">
+                                        <i class="fas fa-trash fa-sm fa-fw mr-2"></i> Hapus
+                                    </button>
+                                            
+                                    <a href="<?=base_url('menu/edit/').encode($m['id']); ?>" 
+                                    class="dropdown-item ">
+                                    <i class="fa fa-edit fa-sm fa-fw mr-2"></i> Edit
+                                    </a>
+                                            
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <?php $i++; ?>
