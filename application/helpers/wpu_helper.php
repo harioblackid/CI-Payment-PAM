@@ -273,6 +273,15 @@ if(!function_exists('mysql_date1')){
     }
 }
 
+
+/*==-- Rupiah currency --==*/
+if (!function_exists('rupiah')) {
+    function rupiah($val) {
+        $value = number_format($val, 0, ',', '.');
+        return 'Rp. ' . $value;
+    }
+}
+
 if (!function_exists('get_month')) {
     function get_month($month) {
         switch ($month) {
