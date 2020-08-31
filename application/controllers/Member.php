@@ -22,6 +22,30 @@ class Member extends CI_Controller
 
     }
 
+    public function keluhan()
+    {
+        $data['title'] = 'Info Keluhan';
+        //$data['data'] = $this->db->get_where('surat_keluar', ['arsip' => 1])->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('member/keluhan', $data);
+        $this->load->view('templates/footer');
+
+    }
+
+    public function simulasi(){
+        $data['title'] = 'Simulasi Tagihan';
+        //$data['data'] = $this->db->get_where('surat_keluar', ['arsip' => 1])->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('member/simulasi', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function hapus($id)
     {
         $this->db->update('surat_keluar', ['arsip' => 0], ['id_surat_keluar' => $id]);

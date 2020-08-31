@@ -144,6 +144,22 @@
                         }
                     });
                 });
+
+                $(document).on("click", ".calculate-simulation", function(e) {
+                    bootbox.alert({
+                        title: "Hasil Perhitungan Simulasi",
+                        message: "Perihitungan Simulasi akan tertera disini",
+                        size: 'large'
+                    });
+                });
+
+                $("#awal, #akhir").keyup(function(){
+                    var stan_awal = parseInt($('#awal').val());
+                    var stan_akhir = parseInt($('#akhir').val());
+
+                    var total = stan_akhir - stan_awal;
+                    $("#pakai").val(total);
+                });
                     
             </script>
 
