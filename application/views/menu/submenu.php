@@ -51,7 +51,7 @@
                                         <i class="fas fa-trash fa-sm fa-fw mr-2"></i> Hapus
                                     </button>
                                             
-                                    <a href="<?=base_url('menu/edit/').encode($sm['id']); ?>" 
+                                    <a href="<?=base_url('menu/editsubmenu/').encode($sm['id']); ?>" 
                                     class="dropdown-item ">
                                     <i class="fa fa-edit fa-sm fa-fw mr-2"></i> Edit
                                     </a>

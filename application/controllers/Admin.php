@@ -21,6 +21,31 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function company(){
+        $data['title'] = 'Company Profile';
+        
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('author', 'Menu', 'required');
+        
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/company', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'name' => $this->input->post('name'),
+                'author' => $this->input->post('author'),
+                'address' => htmlspecialchars($this->input->post('address'))
+                
+            ];
+            $this->db->update('company', $data, ['id' => 1]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile was updated</div>');
+            redirect('admin/company');
+        }
+    }
+
 
     public function role()
     {

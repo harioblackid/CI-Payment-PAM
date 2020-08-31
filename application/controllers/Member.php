@@ -46,6 +46,39 @@ class Member extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function register(){
+        $data['title'] = 'Simulasi Tagihan';
+        //$data['data'] = $this->db->get_where('surat_keluar', ['arsip' => 1])->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('member/register', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function profile(){
+        $data['title'] = 'Simulasi Tagihan';
+        //$data['data'] = $this->db->get_where('surat_keluar', ['arsip' => 1])->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('member/company_profile', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function rincian_tagihan(){
+        $data['title'] = 'Info Tagihan';
+        //$data['data'] = $this->db->get_where('surat_keluar', ['arsip' => 1])->result();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('member/rincian_tagihan', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function hapus($id)
     {
         $this->db->update('surat_keluar', ['arsip' => 0], ['id_surat_keluar' => $id]);

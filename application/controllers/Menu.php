@@ -66,6 +66,39 @@ class Menu extends CI_Controller
         }
     }
 
+    public function editsubmenu($id){
+        $id = decode($id);
+
+        $data['title'] = 'Submenu Management';
+        $data['submenu'] = $this->db->get_where('user_sub_menu', ['id' => $id])->row();
+
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+        
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('menu_id', 'Menu', 'required');
+        $this->form_validation->set_rules('url', 'URL', 'required');
+        $this->form_validation->set_rules('icon', 'icon', 'required');
+
+        if ($this->form_validation->run() ==  false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/edit_submenu', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'title' => $this->input->post('title'),
+                'menu_id' => $this->input->post('menu_id'),
+                'url' => $this->input->post('url'),
+                'icon' => $this->input->post('icon'),
+                'is_active' => $this->input->post('is_active')
+            ];
+            $this->db->update('user_sub_menu', $data, ['id' => $id]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu was edited!</div>');
+            redirect('menu/submenu');
+        }
+    }
+
     public function deletesub($id){
         $id = decode($id);
         if($this->db->delete('user_sub_menu', ['id' => $id])){
